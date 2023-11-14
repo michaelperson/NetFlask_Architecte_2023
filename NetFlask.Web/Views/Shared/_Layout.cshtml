@@ -1,4 +1,5 @@
-﻿<!-- INformation concernan le modèle utiisé pour ma vue
+﻿@using System.Globalization;
+<!-- INformation concernan le modèle utiisé pour ma vue
 	En aucun cas, il y a de dépendance -->
 @model NetFlask.Web.Models.HomeModel
 <!--
@@ -57,8 +58,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<p class="age"><a href="#">@Model.HeaderMovie.Categorie</a> @Model.HeaderMovie.Directors </p>
 					<p class="review">Rating	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;  @Model.HeaderMovie.Rating/10</p>
 					<p class="review reviewgo">Genre	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp; @Model.HeaderMovie.Genre</p>
-					<p class="review">Release &nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp; @Model.HeaderMovie.ReleaseDate.ToShortDateString()</p>
-					<p class="special">@Model.HeaderMovie.Description</p>
+					<p class="review">Release &nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp; @Model.HeaderMovie.ReleaseDate.ToString("d MMMM yyyy", CultureInfo.CreateSpecificCulture("fr-be"))</p>
+					<p class="special">@Model.HeaderMovie.Description.Substring(0,150)...</p>
 					<a class="video" href="#"><i class="video1"></i>WATCH TRAILER</a>
 					<a class="book" href="#"><i class="book1"></i>BOOK TICKET</a>
 				</div>
