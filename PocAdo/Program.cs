@@ -62,18 +62,20 @@ Console.WriteLine("POC ADO");
 #endregion
 string cnstr = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=NetFlask;Integrated Security=True;Connect Timeout=60;Encrypt=False;Trust Server Certificate=False;";
 
-SqlDbConnection connection = new SqlDbConnection(cnstr);
-if(connection.Connect())
+using (SqlDbConnection connection = new SqlDbConnection(cnstr))
 {
-	string query = "Select * from Genre where IdGenre= @Id";
-	Dictionary<string,object> parameters = new Dictionary<string,object>();
-	parameters.Add("Id", 2);
-	IEnumerable<GenreEntity> mesGenres = connection.Execute<GenreEntity>(query, parameters, MapToGenreEntity, false);
-	foreach(var me in mesGenres)
+	if (connection.Connect())
 	{
-		Console.WriteLine($"{me.Id} - {me.Libelle}");
+		string query = "Select * from Genre";// where IdGenre= @Id";
+		Dictionary<string, object> parameters = new Dictionary<string, object>();
+		//parameters.Add("Id", 2);
+		IEnumerable<GenreEntity> mesGenres = connection.Execute<GenreEntity>(query, parameters, MapToGenreEntity, false);
+		foreach (var me in mesGenres)
+		{
+			Console.WriteLine($"{me.Id} - {me.Libelle}");
+		}
+		connection.Disconnect();
 	}
-	connection.Disconnect();
 }
 
 GenreEntity MapToGenreEntity(IDataRecord record)

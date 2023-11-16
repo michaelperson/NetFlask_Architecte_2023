@@ -89,6 +89,7 @@ namespace NetFlask.DAL
 					DbParameter parametre = oCmd.CreateParameter();
 					parametre.ParameterName = kvp.Key;
 					parametre.Value = kvp.Value;
+					oCmd.Parameters.Add(parametre);
 				}
 				//6- Si c'est une procédure stockée, je change le command type
 				oCmd.CommandType = isStoredProc ? System.Data.CommandType.StoredProcedure : System.Data.CommandType.Text;
@@ -158,6 +159,10 @@ namespace NetFlask.DAL
 				catch (Exception)
 				{
 					throw;
+				}
+				finally
+				{
+					Disconnect();
 				}
 			}
 			return retour;
